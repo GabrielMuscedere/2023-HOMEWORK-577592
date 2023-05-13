@@ -14,7 +14,7 @@ public class LabirintoTest {
 	void setUp()  {
 		this.labirinto = new Labirinto();
 		this.Biblioteca = this.labirinto.getStanzaVincente();
-		this.Atrio = this.labirinto.getStanzaIniziale();
+		this.Atrio = this.labirinto.getStanzaCorrente();
 	}
 
 	@Test
@@ -24,7 +24,7 @@ public class LabirintoTest {
 	
 	@Test
 	void testGetStanzaIniziale() {
-		assertEquals(Atrio, this.labirinto.getStanzaIniziale());
+		assertEquals(Atrio, this.labirinto.getStanzaCorrente());
 	}
 
 }

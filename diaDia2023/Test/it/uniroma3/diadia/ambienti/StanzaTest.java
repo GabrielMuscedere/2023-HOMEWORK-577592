@@ -22,11 +22,19 @@ public class StanzaTest {
 		this.stanzaVuota.impostaStanzaAdiacente("nord", this.stanzaNonVuota);
 		this.stanzaNonVuota.impostaStanzaAdiacente("sud", this.stanzaVuota);
 	}
+	
+	@Test
+	final void testImpostaStanzaAdiacente() {
+		assertTrue(this.stanzaVuota.impostaStanzaAdiacente("sud", this.stanzaNonVuota));
+	}
 
 	@Test
 	final void testHasAttrezzo() {
 		assertFalse(this.stanzaVuota.hasAttrezzo("osso"), "la stanza vuota non ha l'attrezzo");
 		assertTrue(this.stanzaNonVuota.hasAttrezzo("osso"), "la stanza vuota non ha l'attrezzo");
+		Attrezzo granata = new Attrezzo("granata", 1);
+		this.stanzaNonVuota.addAttrezzo(granata);
+		assertTrue(this.stanzaNonVuota.hasAttrezzo("granata"), "la stanza vuota non ha l'attrezzo");
 	}
 	
 	@Test
@@ -43,7 +51,7 @@ public class StanzaTest {
 	
 	@Test
 	final void  testAddAttrezzo() {
-		assertTrue(this.stanzaNonVuota.addAttrezzo(osso));
+		assertTrue(this.stanzaVuota.addAttrezzo(osso));
 	}
 
 }
