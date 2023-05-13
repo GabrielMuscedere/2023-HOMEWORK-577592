@@ -6,14 +6,24 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class PartitaTest {
 	private Partita partita;
+	private Labirinto labirinto;
+	private LabirintoBuilder lb;
 
 	@BeforeEach
 	void setUp() {
-		this.partita = new Partita();
+		lb = new LabirintoBuilder()
+				.addStanzaIniziale("Atrio")
+				.addStanzaVincente("Biblioeca")
+				.addAdiacenza("Atrio", "Biblioteca", "nord")
+				.addAdiacenza("Biblioteca", "Atrio", "sud");
+		this.labirinto = this.lb.getLabirinto();
+		this.partita = new Partita(this.labirinto);
 	}
 	
 	@Test

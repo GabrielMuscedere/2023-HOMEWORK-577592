@@ -26,7 +26,7 @@ public class ComandoVai implements Comando {
 		
 		if(this.direzione == null) {
 			io.mostraMessaggio("dove vuoi andare?\nDevi specificare una direzione");
-			direzione = io.leggiRiga();	
+			direzione = io.leggiRiga();
 		}
 		
 		prossimaStanza = stanzaCorrente.getStanzaAdiacente(this.direzione);
@@ -55,4 +55,5 @@ public class ComandoVai implements Comando {
 	public String getParametro() {
 		return this.direzione;
 	}
+	
 }

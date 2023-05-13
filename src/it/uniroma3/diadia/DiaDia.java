@@ -1,5 +1,6 @@
 package it.uniroma3.diadia;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.comandi.*;
 import it.uniroma3.diadia.giocatore.Borsa;
@@ -35,11 +36,18 @@ public class DiaDia {
 
 	private Partita partita;
 	private IO io;
+	private Labirinto labirinto;
 
 	public DiaDia(IO io) {
 		this.io = io;
 		this.partita = new Partita();
 		
+	}
+	
+	public DiaDia(IO io, Labirinto labirinto) {
+		this.io = io;
+		this.partita = new Partita();
+		this.labirinto = labirinto;
 	}
 
 	public void gioca() {

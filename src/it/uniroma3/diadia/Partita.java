@@ -31,10 +31,16 @@ public class Partita {
 		this.labirinto = new Labirinto();
 		this.finita = false;
 		this.giocatore = new Giocatore();
-		this.stanzaCorrente = this.labirinto.getStanzaIniziale();
+		this.stanzaCorrente = this.labirinto.getStanzaCorrente();
 		this.stanzaVincente = this.labirinto.getStanzaVincente();
-		
-		
+	}
+	
+	public Partita(Labirinto labirinto) {
+		this.labirinto = labirinto;
+		this.finita = false;
+		this.giocatore = new Giocatore();
+		this.stanzaCorrente = this.labirinto.getStanzaCorrente();
+		this.stanzaVincente = this.labirinto.getStanzaVincente();
 	}
   
 	/**

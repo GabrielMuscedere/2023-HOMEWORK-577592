@@ -6,19 +6,16 @@ public class StanzaMagicaProtected extends StanzaProtected{
 
 	protected static final int SOGLIA_MAGICA_DEFULT = 3;
 
-	protected int contatoreAttrezziPosati;
 	protected int sogliaMagica;
 
 	public StanzaMagicaProtected(String nome, int sogliaMagica) {
 		super(nome);
 		this.sogliaMagica = sogliaMagica;
-		this.contatoreAttrezziPosati = 0;
 	}
 
 	public StanzaMagicaProtected(String nome) {
 		super(nome);
 		this.sogliaMagica = SOGLIA_MAGICA_DEFULT;
-		this.contatoreAttrezziPosati = 0;
 	}
 
 	protected Attrezzo modificaAttrezzo(Attrezzo attrezzo) {
@@ -34,18 +31,10 @@ public class StanzaMagicaProtected extends StanzaProtected{
 
 	@Override
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		this.contatoreAttrezziPosati++;
-		if(this.contatoreAttrezziPosati > this.sogliaMagica)
+		if(this.attrezzi.size() > this.sogliaMagica)
 			attrezzo = modificaAttrezzo(attrezzo);
 
-		if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
-			this.attrezzi[numeroAttrezzi] = attrezzo;
-			this.numeroAttrezzi++;
-			return true;
-		}
-		else {
-			return false;
-		}
+		return this.attrezzi.add(attrezzo);
 	}
 	
 }

@@ -9,33 +9,35 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaMagicaTest {
 	
-	private Attrezzo granata;
-	private StanzaMagica stanza;
+	private Attrezzo granata, martello, cartello, forbici;
+	private StanzaMagica stanzaMagica;
 	private StringBuilder s;
 	
 	
 	@BeforeEach
 	void setUp() {
-	
+		this.forbici = new Attrezzo("forbici", 1);
+		this.cartello = new Attrezzo("cartello", 1);
+		this.martello = new Attrezzo("martello", 1);
 		this.granata = new Attrezzo("granata", 1);
-		this.stanza = new StanzaMagica("labIA", 3);
+		this.stanzaMagica = new StanzaMagica("labIA");
 		s = new StringBuilder(this.granata.getNome());
 	}
 	
 	
 	@Test
 	void testAddAttrezzoNotNull() {
-		this.stanza.addAttrezzo(granata);
-		assertTrue(this.stanza.hasAttrezzo("granata"));
+		this.stanzaMagica.addAttrezzo(granata);
+		assertTrue(this.stanzaMagica.hasAttrezzo("granata"));
 	}
 
 	@Test
 	void testModificaAttrezzo() {
-		this.stanza.addAttrezzo(this.granata);
-		this.stanza.addAttrezzo(this.granata);
-		this.stanza.addAttrezzo(this.granata);
-		this.stanza.addAttrezzo(this.granata);
-		assertTrue(this.stanza.hasAttrezzo(s.reverse().toString()));
+		this.stanzaMagica.addAttrezzo(this.martello);
+		this.stanzaMagica.addAttrezzo(this.forbici);
+		this.stanzaMagica.addAttrezzo(this.cartello);
+		this.stanzaMagica.addAttrezzo(this.granata);
+		assertTrue(this.stanzaMagica.hasAttrezzo(s.reverse().toString()));
 	}
 
 }
