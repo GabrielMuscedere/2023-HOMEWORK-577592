@@ -15,32 +15,18 @@ import it.uniroma3.diadia.IOConsole;
 
 public class Partita {
 	
-	public static IOConsole IO;
-	
 	private boolean finita;
 	private Labirinto labirinto;
 	private Giocatore giocatore;
-	private Stanza stanzaCorrente;
-	private Stanza stanzaVincente;
 	
 	/**
 	 * Costruttore classe Partita
 	 */
 	
-	public Partita(){
-		this.labirinto = new Labirinto();
-		this.finita = false;
-		this.giocatore = new Giocatore();
-		this.stanzaCorrente = this.labirinto.getStanzaCorrente();
-		this.stanzaVincente = this.labirinto.getStanzaVincente();
-	}
-	
 	public Partita(Labirinto labirinto) {
 		this.labirinto = labirinto;
 		this.finita = false;
 		this.giocatore = new Giocatore();
-		this.stanzaCorrente = this.labirinto.getStanzaCorrente();
-		this.stanzaVincente = this.labirinto.getStanzaVincente();
 	}
   
 	/**
@@ -48,7 +34,7 @@ public class Partita {
 	 * @return vero se partita vinta
 	 */
 	public boolean vinta() {
-		return this.stanzaCorrente == this.stanzaVincente;
+		return this.labirinto.getStanzaCorrente() == this.labirinto.getStanzaVincente();
 	}
 
 	/**
@@ -56,33 +42,33 @@ public class Partita {
 	 * @return vero se partita finita
 	 */
 	public boolean isFinita() {
-		return (finita || vinta() || (giocatore.getCfu() == 0));
+		return (this.finita || this.vinta() || (this.giocatore.getCfu() == 0));
 	}
 	
-	public Stanza getStanzaVincente() {
-		return stanzaVincente;
+	public boolean giocatoreIsVivo() {
+		return this.giocatore.getCfu() > 0;
 	}
-
-	public void setStanzaCorrente(Stanza prossimaStanza) {
-		this.stanzaCorrente = prossimaStanza;
+	
+	public void setStanzaCorrente(Stanza stanzaCorrente) {
+		this.getLabirinto().setStanzaCorrente(stanzaCorrente);
 	}
 
 	public Stanza getStanzaCorrente() {
-		return stanzaCorrente;
+		return this.getLabirinto().getStanzaCorrente();
 	}
 	
 	public Giocatore getGiocatore() {
 		return this.giocatore;
 	}
 	
-	public Labirinto getLabirinto() {
-		return this.labirinto;
-	}
-	
 	public void setGiocatore(Giocatore giocatore) {
 		this.giocatore = giocatore;
 	}
 	
+	public Labirinto getLabirinto() {
+		return this.labirinto;
+	}
+
 	public void setLabirinto(Labirinto labirinto) {
 		this.labirinto = labirinto;
 	}

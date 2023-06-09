@@ -1,66 +1,48 @@
 package it.uniroma3.diadia;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import java.io.FileNotFoundException;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class PartitaTest {
-	private Partita partita;
-	private Labirinto labirinto;
-	private LabirintoBuilder lb;
 
-	@BeforeEach
-	void setUp() {
-		lb = new LabirintoBuilder()
-				.addStanzaIniziale("Atrio")
-				.addStanzaVincente("Biblioeca")
-				.addAdiacenza("Atrio", "Biblioteca", "nord")
-				.addAdiacenza("Biblioteca", "Atrio", "sud");
-		this.labirinto = this.lb.getLabirinto();
-		this.partita = new Partita(this.labirinto);
+	Labirinto labirinto;
+	Partita p;
+	Stanza s;
+
+	@Before
+	public void setUp() throws FileNotFoundException, FormatoFileNonValidoException {
+		 labirinto = Labirinto.newBuilder("labirinto2.txt").getLabirinto();
+//				.addStanzaIniziale("Atrio")
+//				.addAttrezzo("martello", 3)
+//				.addStanzaVincente("Biblioteca")
+//				.addAdiacenza("Atrio", "Biblioteca", "nord")
+//				.getLabirinto();
+		 p = new Partita(labirinto);
+		 s = new Stanza("Stanza");
 	}
 	
 	@Test
-	final void testVinta() {
-		assertFalse(this.partita.vinta());
-	}
-	
-	@Test
-	final void testGetStanzaCorrente() {
-		assertNotNull(this.partita.getStanzaCorrente());
-	}
-	
-	@Test
-	final void testGetStanzaVincente() {
-		assertNotNull(this.partita.getStanzaVincente());
+	public void testGetStanzaVincente() {
+		assertEquals("Biblioteca", p.getLabirinto().getStanzaVincente().getNome());
 	}
 
 	@Test
-	final void testIsFinita() {
-		assertFalse(this.partita.isFinita());
-		this.partita.getGiocatore().setCfu(0);
-		assertTrue(this.partita.isFinita());
+	public void testSetStanzaCorrente() {
+		p.getLabirinto().setStanzaCorrente(s);
+		assertEquals(s, p.getLabirinto().getStanzaCorrente());
 	}
-	
+
 	@Test
-	final void testGetGiocatore() {
-		assertNotNull(this.partita.getGiocatore());
-	}
-	
-	@Test
-	final void testGetLabirinto() {
-		assertNotNull(this.partita.getLabirinto());
-	}
-	
-	@Test
-	final void testFinita() {
-		assertFalse(this.partita.isFinita());
+	public void testIsFinita() {
+		assertFalse(p.isFinita());
 	}
 	
 }

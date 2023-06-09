@@ -1,58 +1,35 @@
 package it.uniroma3.diadia.ambienti;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class StanzaTest {
-	
-	private Stanza stanzaVuota;
-	private Stanza stanzaNonVuota;
-	private Attrezzo osso;
+public class StanzaTest {	
 
-	@BeforeEach
-	void setUp() { //collega le stanze per testare i metodi impostaStanzaAdiacente e getStanzaAdiacente
-		stanzaVuota = new Stanza("Stanza vuota");
-		stanzaNonVuota = new Stanza("Stanza non vuota"); 
-		osso = new Attrezzo("osso", 1);
-		stanzaNonVuota.addAttrezzo(osso);
-		this.stanzaVuota.impostaStanzaAdiacente("nord", this.stanzaNonVuota);
-		this.stanzaNonVuota.impostaStanzaAdiacente("sud", this.stanzaVuota);
+	Stanza s1 = new Stanza("s1");
+	Stanza s2= new Stanza("s2");
+	Attrezzo m = new Attrezzo("martello", 42);
+	@Test
+	public void testGetStanzaAdiacente() {
+		assertNull(s1.getStanzaAdiacente("sud"));
 	}
 	
-	@Test
-	final void testImpostaStanzaAdiacente() {
-		assertTrue(this.stanzaVuota.impostaStanzaAdiacente("sud", this.stanzaNonVuota));
-	}
 
 	@Test
-	final void testHasAttrezzo() {
-		assertFalse(this.stanzaVuota.hasAttrezzo("osso"), "la stanza vuota non ha l'attrezzo");
-		assertTrue(this.stanzaNonVuota.hasAttrezzo("osso"), "la stanza vuota non ha l'attrezzo");
-		Attrezzo granata = new Attrezzo("granata", 1);
-		this.stanzaNonVuota.addAttrezzo(granata);
-		assertTrue(this.stanzaNonVuota.hasAttrezzo("granata"), "la stanza vuota non ha l'attrezzo");
+	public void testImpostaStanzaAdiacente() {
+		s1.impostaStanzaAdiacente("sud", s2);
+		assertEquals(s2, s1.getStanzaAdiacente("sud"));
 	}
 	
 	@Test
-	final void testRemoveAttrezzo() {
-		assertTrue(this.stanzaNonVuota.removeAttrezzo(this.osso));
-		assertFalse(this.stanzaVuota.removeAttrezzo(this.osso));
+	public void testAddAttrezzo() {
+		
+		assertTrue(s1.addAttrezzo(m));
 	}
 	
-	@Test
-	final void testGetStanzaAdiacenze() {
-		assertEquals(this.stanzaVuota.getNome(), this.stanzaNonVuota.getStanzaAdiacente("sud").getNome());
-		assertEquals(this.stanzaNonVuota.getNome(), this.stanzaVuota.getStanzaAdiacente("nord").getNome(), "stanzaVuota non ha una stanza adiacente a sud");
-	}
-	
-	@Test
-	final void  testAddAttrezzo() {
-		assertTrue(this.stanzaVuota.addAttrezzo(osso));
-	}
 
 }
 

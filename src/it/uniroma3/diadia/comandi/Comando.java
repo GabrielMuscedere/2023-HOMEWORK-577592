@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.comandi;
 
+import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 
 /**
@@ -31,47 +33,9 @@ public interface Comando {
 	public String getNome();
 	
 	public String getParametro();
+
+	public void setIo(IO io);
+	
 	
 }
 
-/*
-public class Comando {
-
-    private String nome;
-    private String parametro;
-
-    public Comando(String[] istruzione) {
-		int numeroParole = istruzione.length;
-		
-		if(numeroParole > 0 && numeroParole <= 2) {  // i comandi devono avere una o due parole.
-			if(numeroParole == 1)
-				this.setNome(istruzione, numeroParole - 1);
-		}
-		if (numeroParole == 2) {
-			this.setNome(istruzione, numeroParole - 2);
-			this.setParametro(istruzione, numeroParole - 1);
-		}
-    }
-    
-    public void setNome(String[] istruzioni, int indice) {
-		this.nome = istruzioni[indice];
-	}
-		
-	public void setParametro(String[] istruzioni, int indice) {
-		this.parametro = istruzioni[indice];
-	}
-
-    public String getNome() {
-        return this.nome;
-    }
-
-    public String getParametro() {
-        return this.parametro;
-    }
-
-    public boolean sconosciuto() {
-        return (this.nome == null);
-    }
-}
-
-*/

@@ -14,20 +14,17 @@ import java.util.Scanner;
 
 public class IOConsole implements IO{
 	
-	/**
-	 * 
-	 * @param il messaggio da stampare su schermo per l'utente.
-	 */
+	Scanner scannerDiLinee;
+	
+	public IOConsole(Scanner scanner) {
+		this.scannerDiLinee = scanner;
+	}
+	
 	public void mostraMessaggio(String msg) {
 		System.out.println(msg);
 	}
 	
-	/**
-	 * 
-	 * @return la riga scansionata da tastiera.
-	 */
 	public String leggiRiga() {
-		Scanner scannerDiLinee = new Scanner(System.in);
 		String riga = scannerDiLinee.nextLine();
 		//scannerDiLinee.close();
 		return riga;

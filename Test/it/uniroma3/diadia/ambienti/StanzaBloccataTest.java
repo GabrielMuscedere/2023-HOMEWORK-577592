@@ -1,34 +1,37 @@
 package it.uniroma3.diadia.ambienti;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-class StanzaBloccataTest {
-	StanzaBloccata stanza;
-	Attrezzo granata;
-	Stanza stAdicente;
-	
-	@BeforeEach
-	void setUp()  {
-		this.stanza = new StanzaBloccata("laboratorio", "sud", "granata");
-		this.granata = new Attrezzo("granata", 1);
-		this.stAdicente = new Stanza("labIA");
-		this.stanza.impostaStanzaAdiacente("sud", stAdicente);
-	}
+public class StanzaBloccataTest {
 
-	@Test
-	void testStanzaBloccataConAttrezzoSbloccante() {
-		this.stanza.addAttrezzo(this.granata);
-		assertEquals(this.stAdicente, this.stanza.getStanzaAdiacente("sud"));							
+	private StanzaBloccata sb;
+	private Stanza s;
+	private Attrezzo grimaldello;
+	
+	@Before
+	public void setUp() throws Exception {
+		sb = new StanzaBloccata("StanzaBloccata", "ovest", "grimaldello");
+		s = new Stanza("Stanzetta");
+		grimaldello = new Attrezzo("grimaldello", 1);
+		sb.impostaStanzaAdiacente("ovest", s);
+		
 	}
 	
 	@Test
-	void testStanzaBloccataSenzaAttrezzoSbloccante() {
-		assertNotEquals(this.stAdicente, this.stanza.getStanzaAdiacente("sud"));							
+	public void testGetStanzaAdiacenteDirezioneBloccata() {
+		assertEquals(sb, sb.getStanzaAdiacente("ovest"));
+	}
+	
+	@Test
+	public void testGetStanzaAdiacenteDirezioneSbloccata() {
+		sb.addAttrezzo(grimaldello);
+		assertEquals(s, sb.getStanzaAdiacente("ovest"));
 	}
 
 }

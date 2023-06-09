@@ -1,6 +1,5 @@
 package it.uniroma3.diadia.giocatore;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -131,6 +130,5 @@ public class Borsa {
 		attrezziOrdinati.addAll(this.getAttrezzi());
 		return attrezziOrdinati;
 	}
-
 
 }
